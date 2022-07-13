@@ -1,0 +1,8 @@
+---
+  - username: sekurely
+    cal_name:
+      - SEC meeting
+  - username: furen
+    cal_name:
+      - NTHU Lab meeting
+      - Other Calendar
