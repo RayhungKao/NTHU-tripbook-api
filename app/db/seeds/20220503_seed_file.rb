@@ -10,6 +10,8 @@ Sequel.seed(:development) do
     create_owned_calendars
     create_calendar_members
     create_events
+    create_maps
+    create_pois
   end
 end
 
@@ -20,6 +22,9 @@ CAL_MEMBER_INFO = YAML.load_file("#{DIR}/calendars_members.yml")
 CAL_INFO = YAML.load_file("#{DIR}/calendars_seed.yml")
 EVENT_INFO = YAML.load_file("#{DIR}/events_seed.yml")
 OWNED_CAL_INFO = YAML.load_file("#{DIR}/owned_calendars.yml")
+
+MAPS_INFO = YAML.load_file("#{DIR}/maps_seed.yml")
+POIS_INFO = YAML.load_file("#{DIR}/pois_seed.yml")
 
 def create_accounts
   ACCOUNTS_INFO.each do |account_info|
@@ -64,5 +69,23 @@ def create_events
     Tripbook::CreateEventForCalendar.call(
       auth:, cal_id: calendar.id, event_data: event_info
     )
+  end
+end
+
+def create_maps
+  MAPS_INFO.each do |map_info|
+    Tripbook::Map.create(map_info)
+  end
+end
+
+def create_pois
+  POIS_INFO.each do |map|
+    map_name = map['map_name']
+    map_info = map['map_info']
+    map_info.each do |poi|
+      Tripbook::CreatePoiforMap.call(
+        map_name: map_name, poi_data: poi
+      )
+    end
   end
 end

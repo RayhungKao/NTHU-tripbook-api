@@ -8,7 +8,7 @@ Sequel.migration do
       primary_key :id
       foreign_key :map_id, table: :maps
 
-      String :name
+      String :name, unique:true
       String :latitude_secure, null: false
       String :longitude_secure, null: false
       String :radius
