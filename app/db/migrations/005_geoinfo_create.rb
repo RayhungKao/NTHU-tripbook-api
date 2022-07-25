@@ -7,9 +7,10 @@ Sequel.migration do
     create_table(:geoinfos) do
       primary_key :id
 
-      String :userId
-      String :poiId_secure
-      Boolean :entryOrExit
+      String :username
+      String :poiId
+      Boolean :entered
+      String :entryTime
 
       DateTime :created_at
       DateTime :updated_at

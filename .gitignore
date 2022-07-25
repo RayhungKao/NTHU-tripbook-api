@@ -5,3 +5,4 @@ config/secrets.yml
 .irb_history
 coverage/*
 !coverage/.resultset.json
+.DS_Store
