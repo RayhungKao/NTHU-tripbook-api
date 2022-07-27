@@ -38,14 +38,14 @@ module Tripbook
         # POST api/v1/geoinfos/[username]
         routing.post do
           new_data = JSON.parse(routing.body.read)
-          if ((Geoinfo.first("poiId": new_data['poiId']) && Geoinfo.first("entered": new_data['entered'])).nil?)
+          if ((Geoinfo.first("username": new_data['username']) && Geoinfo.first("poiId": new_data['poiId']) && Geoinfo.first("entered": new_data['entered'])).nil?)
             new_geoinfo = Geoinfo.create(new_data)
             raise('Could not save geoinfo') unless new_geoinfo.save
             response.status = 201
             { message: 'Geoinfo saved', data: new_geoinfo }.to_json
           else 
             response.status = 200
-            { message: 'Geoinfo already saved before', data: new_geoinfo }.to_json
+            { message: 'Geoinfo already saved before', data: 'none' }.to_json
           end
         rescue Sequel::MassAssignmentRestriction
           Api.logger.warn "MASS-ASSIGNMENT: #{new_data.keys}"
