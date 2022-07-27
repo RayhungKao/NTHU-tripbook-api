@@ -8,6 +8,7 @@ module Tripbook
   # Models a registered accountvhjrfgyui
   class Account < Sequel::Model
     one_to_many :owned_calendars, class: :'Tripbook::Calendar', key: :owner_id
+    one_to_many :owned_cards, class: :'Tripbook::Card', key: :owner_id
 
     many_to_many :involvements,
                  class: :'Tripbook::Calendar',
@@ -16,7 +17,8 @@ module Tripbook
 
     plugin :association_dependencies,
            owned_calendars: :destroy,
-           involvements: :nullify
+           owned_cards:     :destroy,
+           involvements:    :nullify
 
     plugin :whitelist_security
     set_allowed_columns :username, :email, :password
