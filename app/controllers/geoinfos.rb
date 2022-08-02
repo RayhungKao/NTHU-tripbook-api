@@ -13,14 +13,6 @@ module Tripbook
       routing.halt(403, unauthorized_message) unless @auth_account
       @account = @auth_account
 
-      # GET api/v1/geoinfos
-      routing.get do
-        output = { data: Geoinfo.all }
-        JSON.pretty_generate(output)
-      rescue StandardError
-        routing.halt 404, { message: 'Could not find geoinfos' }.to_json
-      end
-
       routing.on String do |username|
         routing.halt(403, UNAUTH_MSG) unless @auth_account
 
