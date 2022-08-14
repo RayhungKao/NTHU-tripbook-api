@@ -30,7 +30,7 @@ module Tripbook
         # POST api/v1/geoinfos/[username]
         routing.post do
           new_data = JSON.parse(routing.body.read)
-          if ((Geoinfo.first("username": new_data['username']) && Geoinfo.first("poiId": new_data['poiId']) && Geoinfo.first("entered": new_data['entered'])).nil?)
+          if ( Geoinfo.first("username": new_data['username'], "poiId": new_data['poiId'], "entered": new_data['entered']).nil?)
             new_geoinfo = Geoinfo.create(new_data)
             raise('Could not save geoinfo') unless new_geoinfo.save
             response.status = 201
