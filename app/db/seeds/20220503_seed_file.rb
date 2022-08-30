@@ -5,7 +5,7 @@ include Tripbook::SecureRequestHelpers
 
 Sequel.seed(:development) do
   def run
-    puts 'Seeding accounts, projects, documents'
+    puts 'Seeding accounts, maps, pois'
     create_accounts
     create_nthu_accounts
     create_owned_calendars
@@ -18,14 +18,8 @@ end
 
 Sequel.seed(:production) do
   def run
-    puts 'Seeding accounts, projects, documents'
-    create_accounts
+    puts 'Seeding nthu_users_accounts'
     create_nthu_accounts
-    create_owned_calendars
-    create_calendar_members
-    create_events
-    create_maps
-    create_pois
   end
 end
 
