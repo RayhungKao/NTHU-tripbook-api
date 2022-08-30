@@ -50,7 +50,7 @@ group :development do
   gem 'rubocop-performance'
 end
 
-group :development, :test do
+group :development, :test, :production do
   gem 'sequel-seed'
   gem 'sqlite3'
 end
