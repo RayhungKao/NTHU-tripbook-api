@@ -94,6 +94,14 @@ namespace :db do
     Sequel::Seeder.apply(@app.DB, 'app/db/seeds')
   end
 
+  desc 'Seeds the production database'
+  task :pdseed => :load_models do
+    require 'sequel/extensions/seed'
+    Sequel::Seed.setup(:production)
+    Sequel.extension :seed
+    Sequel::Seeder.apply(@app.DB, 'app/db/seeds')
+  end
+
   desc 'Delete all data and reseed'
   task reseed: [:reset_seeds, :seed]
 end
