@@ -22,6 +22,7 @@ gem 'hirb', '~>0'
 gem 'sequel', '~>5'
 
 group :production do
+  gem 'sequel-seed'
   gem 'pg'
 end
 
@@ -50,7 +51,7 @@ group :development do
   gem 'rubocop-performance'
 end
 
-group :development, :test, :production do
+group :development, :test do
   gem 'sequel-seed'
   gem 'sqlite3'
 end
