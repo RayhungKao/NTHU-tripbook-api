@@ -7,6 +7,7 @@ Sequel.seed(:development) do
   def run
     puts 'Seeding accounts, maps, pois'
     create_accounts
+    create_demo_accounts
     create_nthu_accounts
     create_owned_calendars
     create_calendar_members
@@ -18,8 +19,8 @@ end
 
 Sequel.seed(:production) do
   def run
-    puts 'Seeding nthu_users_accounts'
-    create_nthu_accounts
+    puts 'Seeding demo accounts'
+    create_demo_accounts
   end
 end
 
@@ -27,6 +28,7 @@ require 'yaml'
 DIR = File.dirname(__FILE__)
 ACCOUNTS_INFO = YAML.load_file("#{DIR}/accounts_seed.yml")
 NTHU_USERS_INFO = YAML.load_file("#{DIR}/nthu_users_seed.yml")
+DEMO_ACCOUNTS_INFO = YAML.load_file("#{DIR}/demo_accounts_seed.yml")
 
 CAL_MEMBER_INFO = YAML.load_file("#{DIR}/calendars_members.yml")
 CAL_INFO = YAML.load_file("#{DIR}/calendars_seed.yml")
@@ -38,6 +40,12 @@ POIS_INFO = YAML.load_file("#{DIR}/pois_seed.yml")
 
 def create_accounts
   ACCOUNTS_INFO.each do |account_info|
+    Tripbook::Account.create(account_info)
+  end
+end
+
+def create_demo_accounts
+  DEMO_ACCOUNTS_INFO.each do |account_info|
     Tripbook::Account.create(account_info)
   end
 end
