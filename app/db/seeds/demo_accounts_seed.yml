@@ -1,0 +1,4 @@
+---
+- username: demo
+  email: demo@tripbook.example
+  password: tripbook-demo

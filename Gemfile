@@ -21,8 +21,11 @@ gem 'rbnacl', '~>7'
 gem 'hirb', '~>0'
 gem 'sequel', '~>5'
 
+# SQLite is also used in production for the free-tier demo (DATABASE_URL picks the adapter)
+gem 'sequel-seed'
+gem 'sqlite3'
+
 group :production do
-  gem 'sequel-seed'
   gem 'pg'
 end
 
@@ -49,9 +52,4 @@ group :development do
   # Quality
   gem 'rubocop'
   gem 'rubocop-performance'
-end
-
-group :development, :test do
-  gem 'sequel-seed'
-  gem 'sqlite3'
 end
